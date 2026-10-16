@@ -28,3 +28,15 @@ INVENTORY SERVICE
 
 RETURN RESPONSE
 Saved Donor object → JSON response → Frontend
+
+
+
+EXPLAINATION:-
+In my Blood Donor Management System, the DonorController acts as the entry point for donor-related REST API requests.
+When a donor registers, the controller receives the JSON request and converts it into a Donor object. 
+It calls the GeocodingService to obtain latitude and longitude from the donor's address. 
+Then, it saves the donor through the DonorRepository, retrieves the associated hospital, and calls the InventoryService to update the blood stock.
+When a donation is recorded, the controller calls the BadgeService. 
+This service saves the donation history, updates the donor's donation count and last donation date, and calculates the badge level. 
+The InventoryService is then called to update the corresponding blood group stock.
+Finally, the controller returns the saved donor or donation details as a JSON response to the frontend. I use Spring Data JPA repositories to interact with the MySQL database.
