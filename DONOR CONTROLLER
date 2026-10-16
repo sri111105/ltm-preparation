@@ -1,0 +1,30 @@
+USER INPUT
+Donor registration form — name, blood group, address, city, hospital ID ---->
+
+DONOR CONTROLLER — POST /blood
+1. JSON → Donor Java object using @RequestBody
+2. Prepare address + city ----->
+
+GEOCODING SERVICE
+1. Send address to Nominatim API
+2. Extract latitude and longitude
+3. If API fails, try hardcoded city coordinates
+4. If no match, use default Chennai coordinates with random offset ----->
+
+DONOR CONTROLLER
+1. Set latitude and longitude in Donor object
+2. Call donorRepository.save(donor) ----->
+
+HOSPITAL REPOSITORY
+1. Find hospital using hospitalId
+2. Get hospital name ------>
+
+INVENTORY SERVICE
+1. Call incrementStock(hospitalName, bloodGroup, 1)
+2. Find existing hospital + blood group stock
+3. Increase quantity by 1
+4. Recalculate stock status
+5. Save inventory record ----->
+
+RETURN RESPONSE
+Saved Donor object → JSON response → Frontend
