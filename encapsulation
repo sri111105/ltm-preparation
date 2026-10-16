@@ -1,0 +1,33 @@
+
+import java.util.*;
+class Main 
+{
+    public static void main(String[] args) 
+    {
+        Employee emp = new Employee();
+        System.out.println(emp.getsalary());
+        emp.setsalary(30000);
+        System.out.println(emp.getsalary());
+    }
+}
+class Employee 
+{
+    private int salary = 20000;  
+    public int getsalary() 
+    {
+        return salary;
+    }
+    public void setsalary(int salary)
+    {
+        this.salary=salary;
+    }
+}
+
+
+explaination:-
+“Encapsulation is one of the four pillars of object-oriented programming.
+In this program, I have created an Employee class with a private variable called salary, initialized to 20000.
+Since salary is private, I cannot access it directly from outside the Employee class. So, I use a getter method called getsalary() to retrieve the salary and a setter method called setsalary() to update it.
+Initially, the salary is 20000. When I call setsalary(30000), the salary is updated to 30000. Then, I call getsalary() again to display the updated salary.
+The output is 20000 and 30000.
+This demonstrates encapsulation because the data is private and accessed or modified through methods.”
