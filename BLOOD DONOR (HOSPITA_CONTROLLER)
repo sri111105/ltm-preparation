@@ -1,0 +1,71 @@
+BLOOD REQUEST:-
+
+USER INPUT
+Raw text or manually entered form details---->
+
+HOSPITAL CONTROLLER
+JSON → Java Map; checks whether rawText exists----->
+
+REQUEST PARSER SERVICE
+1. Gets request-parsing instructions from PromptBuilder
+2. Calls LlmService to extract structured details
+3. Converts the JSON response into a BloodRequest object
+4. Uses a regex-based fallback if the AI call fails or JSON parsing fails ----->
+
+HOSPITAL CONTROLLER
+Sets the request level to Urgent, extracts a city, and saves the request ---->
+
+BloodRequestRepository → DATABASE
+Stores the structured request and returns it as JSON
+
+
+
+MATCHING DONOR:-
+USER INPUT
+Blood request ID, optional patient name ----->
+
+HOSPITAL CONTROLLER
+Retrieves the saved blood request from BloodRequestRepository ---->
+
+DONOR MATCHING SERVICE
+1. Search by blood group
+2. Try city-specific matches first
+3. Fall back to other donors of that blood group if needed
+4. Apply the request-level filter
+5. Trigger notifications for donors passing its eligibility check --->
+
+GEOCODING SERVICE + BADGE SERVICE
+Controller calculates donor distances, checks the 90-day date rule, and calculates badge levels ---->
+
+SORT + INVENTORY UPDATE
+Sorts the returned donor list by distance and calls decrementStock() ---->
+
+JSON RESPONSE
+Returns matchedDonors with donor details, distance, eligibility and badge information
+
+
+
+INVENTORY MANAGEMENT:-
+
+GET /api/hospital/inventory
+View inventory
+Controller → InventoryService.getInventory() → BloodInventoryRepository → Return inventory JSON
+If a hospital name is provided, it retrieves that hospital's inventory; otherwise, it retrieves all inventory records.
+
+PUT /api/hospital/inventory
+Update stock
+Controller → InventoryService.updateInventory() → Calculate status → Save → Return updated record
+Creates or updates the hospital/blood-group inventory record and sets the last-updated timestamp.
+
+
+EXPLAINATION :-
+
+My HospitalController manages the hospital-side operations of my Blood Donor Management System.
+First, it allows hospital staff to create a blood request either by entering natural language or by using a manual form. 
+For natural-language requests, the RequestParserService uses an LLM to extract structured details, with a fallback parser if the AI response is unavailable or invalid.
+Next, the DonorMatchingService identifies potential donors based on blood group, location, and the request level. 
+The GeocodingService helps calculate distances, while the BadgeService provides donor badge information. The NotificationService can notify eligible donors.
+The system also supports blood inventory management through InventoryService, generates request confirmation PDFs through PdfGeneratorService, and provides inventory analytics through LlmService.
+ReminderService checks which donors are approaching the configured donation interval.
+Finally, Spring Data JPA repositories interact with the MySQL database, and the controller returns the appropriate response to the frontend.
+This layered approach separates request handling, business logic, external integrations, and database operations, making the application easier to maintain and extend.
