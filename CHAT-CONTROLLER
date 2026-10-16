@@ -7,3 +7,8 @@ LLM SERVICE (1.CALL GEMINI)---->
 RETURN ANS -----> 
 STORED IN REPOSITORY .
 
+EXPLAINATION:-
+My ChatController acts as the main coordinator of the chatbot. First, it receives the user's message, session ID, and preferred language through a POST request. 
+Then, it calls RagService to retrieve relevant blood donation guidelines and combines that context with the instructions from PromptBuilder. 
+Next, it sends the combined prompt and user question to LlmService, which calls the Gemini API. 
+The controller parses the JSON response to extract the reply and language, saves the chat details through ChatLogRepository, and returns the final response to the frontend.
