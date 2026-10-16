@@ -1,0 +1,40 @@
+import java.util.*;
+class Main
+{
+   public static void main(String[] args)
+    {
+        payment p1=new upi();
+        payment p2=new card();
+        p1.pay();
+        p2.pay();
+    }
+}
+class payment
+{
+    void pay()
+    {
+    System.out.println("making payment");
+    }
+}
+class upi extends payment
+{
+    void pay()
+    {
+        System.out.println("upi confirm");
+    }       
+}
+class card extends payment
+{
+    void pay()
+    {
+        System.out.println("card confirm");
+    }
+}
+
+
+explaination:-
+This program demonstrates method overriding in Java.
+First, I created a parent class called `Payment`, which contains a `pay()` method. Then, I created two child classes, `UpiPayment` and `CardPayment`, using the `extends` keyword.
+Both child classes override the `pay()` method and provide their own implementations. In the main method, I created parent-class references pointing to child-class objects.
+When I call `p1.pay()`, the UPI payment implementation executes. When I call `p2.pay()`, the card payment implementation executes.
+This is an example of **runtime polymorphism**, because Java decides which overridden method to execute based on the actual object at runtime.
