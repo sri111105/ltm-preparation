@@ -1,0 +1,27 @@
+class Calculator {
+    int add(int a, int b) {
+        return a + b;
+    }
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+    double add(double a, double b) {
+        return a + b;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+
+        Calculator c = new Calculator();
+        System.out.println(c.add(10, 20));
+        System.out.println(c.add(10, 20, 30));
+        System.out.println(c.add(10.5, 20.5));
+    }
+}
+
+explaination:-
+This program demonstrates method overloading in Java.
+I created a class called `Calculator` with three methods having the same name, `add()`, but different parameter lists.
+The first method accepts two integers, the second accepts three integers, and the third accepts two double values.
+When I call the `add()` method with different arguments, Java selects the appropriate method based on the parameter list. This is called **compile-time polymorphism**, because the method call is resolved by the compiler.
+Method overloading improves code readability and allows us to use the same method name for similar operations.
