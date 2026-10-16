@@ -1,0 +1,24 @@
+class Vehicle {
+    void start() {
+        System.out.println("Vehicle is starting");
+    }
+}
+class Car extends Vehicle {
+    void drive() {
+        System.out.println("Car is driving");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Car c = new Car();
+        c.start();
+        c.drive();
+    }
+}
+
+
+explaination:-
+Inheritance is one of the four pillars of object-oriented programming. It allows a child class to acquire the properties and methods of a parent class using the `extends` keyword.
+For example, I created a parent class called `Vehicle` with a `start()` method. Then, I created a child class called `Car`, which extends `Vehicle` and has its own `drive()` method.
+In the main method, I created a `Car` object and called both `start()` and `drive()`. The `start()` method is inherited from the parent class, while `drive()` belongs to the child class.
+The main advantage of inheritance is code reusability, and it also helps us build a clear class hierarchy.
