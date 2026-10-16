@@ -1,0 +1,27 @@
+import java.util.*;
+class Main
+{
+    public static void main(String[] args)
+    {
+    Atm a= new myatm();
+        a.withdraw();
+    }     
+}
+abstract class Atm
+{
+    abstract void withdraw();
+}
+class myatm extends Atm 
+{
+    void withdraw()
+    {
+   System.out.print("withdraw successfull");    
+    }
+}
+
+explaination:-
+Abstraction is one of the four pillars of object-oriented programming. 
+It hides implementation details and shows only the essential functionality to the user. 
+In Java, we can achieve abstraction using abstract classes and interfaces. 
+For example, in an ATM, users can withdraw cash without knowing the internal transaction process. 
+In my program, I use an abstract ATM class and implement the withdraw method in the child class.
